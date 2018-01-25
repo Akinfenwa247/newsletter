@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Mail\SendNewsletter;
+use App\Subscriber;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -31,6 +32,10 @@ class SendNewsletterJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to('akinfenwasamson@gmail.com')->send(new SendNewsletter());
+        $subscribers = Subscriber::all();
+        foreach ($subscribers as $subscriber)
+        {
+            Mail::to($subscriber->email)->send(new SendNewsletter());
+        }
     }
 }

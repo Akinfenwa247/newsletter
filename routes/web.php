@@ -18,12 +18,21 @@ use Carbon\Carbon;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/message', function () {
+    return view('message');
+});
 Route::resource('subscribe', 'SubscriberController');
 
-Route::get('send', function(){
+/*Route::get('send', function(){
     $job = (new SendNewsletterJob())
         ->delay(Carbon::now()->addSeconds(10));
 
     dispatch($job);
     return('sent');
-});
+});*/
+
+Route::get('send', 'NewsletterController@send')->name('send');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
