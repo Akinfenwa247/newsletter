@@ -5,9 +5,9 @@
 
 @section('content')
     <div class="container">
-        @if( session('success') )
+        @if (session('status'))
             <div class="alert alert-success">
-                Campaign Sent!
+                {{ session('status') }}
             </div>
         @endif
         <h1>Enter the details for the email you wish to send</h1>

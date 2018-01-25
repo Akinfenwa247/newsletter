@@ -20,8 +20,6 @@ class NewsletterController extends Controller
         foreach ($subscribers as $subscriber) {
             Mail::queue( new SendNewsletter($subscriber, $request->name, $request->post));
         }
-        return back()->with([
-            'success' => "Campaign Sent!"
-        ]);
+        return back()->with('status', 'Invitation Sent Successfully');
     }
 }
